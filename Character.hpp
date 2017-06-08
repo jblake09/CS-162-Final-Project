@@ -2,6 +2,7 @@
 #define CHARACTER_HPP
 
 #include<string>;
+#include"Misc.hpp"
 
 using std::string;
 
