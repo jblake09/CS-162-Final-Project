@@ -1,5 +1,6 @@
-#include"Character.hpp";
+#include"Character.hpp"
 #include"Cave.hpp"
+#include"SubmergedCave.hpp"
 #include"Hero.hpp"
 #include<iostream>
 #include"Misc.hpp"
@@ -17,19 +18,24 @@ int main()
 	char action;
 	bool program = true;
 	Hero *test = new Hero();
-	Room *testCave = new Cave(test);
-	testCave->createLevel();
-	testCave->populateLevel();
+	//Room *testCave = new Cave(test);
+	Room *testSubmerge = new SubmergedCave(test);
+	//testCave->createLevel();
+	//testCave->populateLevel();
+	testSubmerge->createLevel();
+	testSubmerge->populateLevel();
 	//testCave->printLevel();
 	while (!(test->Dead()))
 	{
 		//testCave->MovePlayer();
-		testCave->printGame();
-		cout << "Controls a(Left), d(right), s(down), w(up), t(use pack item): " << endl;
+		//testCave->printGame();
+		testSubmerge->printGame();
+		cout << "Controls a(Left), d(right), s(down), w(up), e(interact), t(use pack item): " << endl;
 		cin >> action;
 		if (action == 'a' || action == 'd' || action == 's' || action == 'w')
 		{
-			testCave->MovePlayer(action);
+			testSubmerge->MovePlayer(action);
+			//testCave->MovePlayer(action);
 		}
 		else if (action == 't')
 		{
@@ -37,6 +43,11 @@ int main()
 			int itemChoice;
 			cin >> itemChoice;
 			test->useFromPack(itemChoice);
+		}
+		else if (action == 'e')
+		{
+			testSubmerge->playerInteract();
+			//testCave->playerInteract();
 		}
 
 	}

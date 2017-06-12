@@ -21,6 +21,7 @@ public:
 	void setDisplay(char);
 	void setXpos(int);
 	void setYpos(int);
+	void setOriginalHealth(int);
 	void printCreature();
 	void removeFromPack(char);
 	int getHealth();

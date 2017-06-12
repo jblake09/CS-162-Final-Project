@@ -10,6 +10,7 @@ Hero::Hero()
 	setType("Steve Helsing");
 	setXpos(2);
 	setYpos(2);
+	setOriginalHealth(20);
 }
 
 void Hero::move(char movement)

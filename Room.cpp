@@ -161,11 +161,14 @@ void Room::setLevel(char **in)
 			level[i][j] = in[i][j];
 		}
 	}
+	/*
 	for (int i = 0; i < row; i++)
 	{
 		delete[]in[i];
 	}
+	
 	delete[]in;
+	*/
 	//delete in
 }
 

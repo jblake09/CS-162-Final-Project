@@ -10,6 +10,7 @@ Character::Character()
 	x = 0;
 	y = 0;
 	pack = "";
+	orignialHealth = 0;
 }
 
 void Character::setType(string inType)
@@ -40,6 +41,11 @@ void Character::setXpos(int input)
 void Character::setYpos(int in)
 {
 	y = in;
+}
+
+void Character::setOriginalHealth(int in)
+{
+	orignialHealth = in;
 }
 
 void Character::printCreature()
@@ -129,7 +135,7 @@ void Character::useFromPack(int in)
 				setHealth(getOriginalHealth());
 				cout << "You just used a health potion!" << endl;
 			}
-			else if (pack[1] == 'K')
+			else if (pack[3] == 'K')
 			{
 				cout << "You cant use the key yet!" << endl;
 			}
@@ -142,7 +148,7 @@ void Character::useFromPack(int in)
 				setHealth(getOriginalHealth());
 				cout << "You just used a health potion!" << endl;
 			}
-			else if (pack[1] == 'K')
+			else if (pack[5] == 'K')
 			{
 				cout << "You cant use the key yet!" << endl;
 			}
@@ -152,17 +158,59 @@ void Character::useFromPack(int in)
 	{
 		if (in == 1)
 		{
-
+			if (pack[1] == 'H')
+			{
+				pack[1] = pack[3];
+				pack.erase(2);
+				setHealth(getOriginalHealth());
+				cout << "You just used a health potion!" << endl;
+			}
+			else if (pack[1] == 'K')
+			{
+				cout << "You cant use the key yet!" << endl;
+			}
 		}
 		else if (in == 2)
 		{
-
+			if (pack[3] == 'H')
+			{
+				pack.erase(2);
+				setHealth(getOriginalHealth());
+				cout << "You just used a health potion!" << endl;
+			}
+			else if (pack[3] == 'K')
+			{
+				cout << "You cant use the key yet!" << endl;
+			}
 		}
 		else if (in == 3)
+		{
+			cout << "That space is empty!" << endl;
+		}
 	}
-	else if (size == 5)
+	else if (size == 2)
 	{
-
+		if (in == 1)
+		{
+			if (pack[1] == 'H')
+			{
+				pack.erase(0);
+				setHealth(getOriginalHealth());
+				cout << "You just used a health potion!" << endl;
+			}
+			else if (pack[1] == 'K')
+			{
+				cout << "You cant use the key yet!" << endl;
+			}
+		}
+		else if (in == 2)
+		{
+			cout << "That space is empty!" << endl;
+		}
+		else if (in == 3)
+		{
+			cout << "That space is empty!" << endl;
+		}
 	}
 	
 	

@@ -9,6 +9,7 @@ public:
 	Cave(Hero*);
 	void populateLevel();
 	void playerHealthDrain();
+	void playerInteract();
 	~Cave();
 };
 
