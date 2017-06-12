@@ -45,6 +45,19 @@ void Hero::move(char movement)
 	}
 }
 
+bool Hero::Dead()
+{
+	if (getHealth() > 0)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	
+}
+
 
 Hero::~Hero()
 {

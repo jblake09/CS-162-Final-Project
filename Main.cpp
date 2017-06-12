@@ -14,12 +14,33 @@ int main()
 {
 	srand(time(0));
 	int row = 5, col = 5;
+	char action;
+	bool program = true;
 	Hero *test = new Hero();
 	Room *testCave = new Cave(test);
 	testCave->createLevel();
 	testCave->populateLevel();
-	testCave->printLevel();
-	testCave->MovePlayer();
+	//testCave->printLevel();
+	while (!(test->Dead()))
+	{
+		//testCave->MovePlayer();
+		testCave->printGame();
+		cout << "Controls a(Left), d(right), s(down), w(up), t(use pack item): " << endl;
+		cin >> action;
+		if (action == 'a' || action == 'd' || action == 's' || action == 'w')
+		{
+			testCave->MovePlayer(action);
+		}
+		else if (action == 't')
+		{
+			cout << "Which item would you like to use? (1,2,3) ";
+			int itemChoice;
+			cin >> itemChoice;
+			test->useFromPack(itemChoice);
+		}
+
+	}
+	
 	/*
 	char ** board = new char *[row];
 	for (int i = 0; i < row; ++i)

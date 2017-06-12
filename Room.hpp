@@ -17,6 +17,7 @@ private:
 	int row, col;
 	char **level;
 	Hero* player;
+	bool lever = false, first = true;
 
 public:
 	Room(Hero*);
@@ -26,8 +27,10 @@ public:
 	void setWest(Room*);
 	void setNorth(Room*);
 	void setSouth(Room*);
+	void setHero(Hero*);
 	void createLevel();
-	void MovePlayer();
+	void MovePlayer(char);
+	Hero* getHero();
 	Room* getEast();
 	Room* getWest();
 	Room* getNorth();
@@ -37,7 +40,10 @@ public:
 	int getCol();
 	void setLevel(char**);
 	virtual void populateLevel() = 0;
+	virtual void playerHealthDrain();
+	virtual void playerInteract();
 	void printLevel();
+	void printGame();
 	~Room();
 };
 

@@ -8,6 +8,7 @@ class Hero :
 public:
 	Hero();
 	void move(char);
+	bool Dead();
 	~Hero();
 };
 

@@ -8,6 +8,7 @@ class Cave :
 public:
 	Cave(Hero*);
 	void populateLevel();
+	void playerHealthDrain();
 	~Cave();
 };
 

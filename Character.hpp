@@ -10,8 +10,9 @@ class Character
 {
 private:
 	string type;
-	int Armor, health, x, y;
+	int Armor, health,orignialHealth, x, y;
 	char display;
+	string pack;
 public:
 	Character();
 	void setType(string);
@@ -21,12 +22,19 @@ public:
 	void setXpos(int);
 	void setYpos(int);
 	void printCreature();
+	void removeFromPack(char);
 	int getHealth();
 	int getArmor();
 	int getXpos();
 	int getYpos();
+	int getOriginalHealth();
+	void add2Pack(char);
+	void useFromPack(int);
 	string getType();
 	char getDisplay();
+	string getPack();
+	void printPack();
+	void printHealth();
 	virtual void move(char);
 	virtual int attack();
 	virtual int defend();

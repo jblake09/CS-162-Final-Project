@@ -44,22 +44,76 @@ void Room::setSouth(Room *s)
 	South = s;
 }
 
-void Room::MovePlayer()
+void Room::setHero(Hero *in)
 {
-	char mover = ' ';
+	player = in;
+}
 
-	while (mover != 'v')
+void Room::MovePlayer(char mover)
+{
+	//player->printPack();
+	//level[player->getYpos()][player->getXpos()] = player->getDisplay();
+	//printLevel();
+	//player->printHealth();
+	//player->printPack();
+	//cout << "Make a move: " << endl;
+	//char mover = ' ';
+	//cin >> mover;
+	int prevX = player->getXpos(), prevY = player->getYpos();
+	player->move(mover);
+	int nextX = player->getXpos(), nextY = player->getYpos();
+	if (level[nextY][nextX] == '.')
 	{
-		
 		level[player->getYpos()][player->getXpos()] = player->getDisplay();
-		printLevel();
-		cout << "Make a move: " << endl;
-		cin >> mover;
-		level[player->getYpos()][player->getXpos()] = '.';
-		player->move(mover);
-		level[player->getYpos()][player->getXpos()] = player->getDisplay();
-		printLevel();
+		level[prevY][prevX] = '.';
 	}
+	else if (level[nextY][nextX] == 'H')
+	{
+		if ((player->getPack()).size() < 5)
+		{
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+			level[prevY][prevX] = '.';
+			player->add2Pack('H');
+		}
+		else
+		{
+			cout << "Your pack is full!" << endl;
+			player->setXpos(prevX);
+			player->setYpos(prevY);
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+		}
+	}
+	else if (level[nextY][nextX] != '.')
+	{
+		//cout << "hey" << endl;
+		player->setXpos(prevX);
+		player->setYpos(prevY);
+		level[player->getYpos()][player->getXpos()] = player->getDisplay();
+		//return;
+		//level[prevY][prevX] = '.';
+	}
+	playerHealthDrain();
+	/*
+	{
+		while (mover != 'v')
+		{
+
+			//level[player->getYpos()][player->getXpos()] = player->getDisplay();
+			//printLevel();
+			//cout << "Make a move: " << endl;
+			//cin >> mover;
+			level[player->getYpos()][player->getXpos()] = '.';
+			player->move(mover);
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+			//printLevel();
+		}
+	}
+	*/
+}
+
+Hero * Room::getHero()
+{
+	return player;
 }
 
 
@@ -107,6 +161,12 @@ void Room::setLevel(char **in)
 			level[i][j] = in[i][j];
 		}
 	}
+	for (int i = 0; i < row; i++)
+	{
+		delete[]in[i];
+	}
+	delete[]in;
+	//delete in
 }
 
 
@@ -120,8 +180,19 @@ void Room::createLevel()
 }
 
 
+void Room::playerHealthDrain()
+{
+	return;
+}
+
+void Room::playerInteract()
+{
+	return;
+}
+
 void Room::printLevel()
 {
+	cout << endl;
 	for (int i = 0; i < row; i++)
 	{
 		for (int j = 0; j < col; j++)
@@ -132,6 +203,14 @@ void Room::printLevel()
 		cout << endl;
 		cout << string(col * 4, '-') << endl;
 	}
+}
+
+void Room::printGame()
+{
+	level[player->getYpos()][player->getXpos()] = player->getDisplay();
+	printLevel();
+	player->printHealth();
+	player->printPack();
 }
 
 Room::~Room()
