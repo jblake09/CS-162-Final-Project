@@ -109,14 +109,14 @@ void Cave::playerInteract()
 	{
 		cout << "There is nothing to interact with!" << endl;
 	}
-	/*
+	
 	for (int i = 0; i < getRow(); i++)
 	{
 		delete[]board[i];
 	}
 
 	delete[]board;
-	*/
+	
 }
 
 bool Cave::newRoom()
@@ -137,12 +137,23 @@ bool Cave::newRoom()
 	}
 	if (temp->getYpos() == 0 && temp->getXpos() == 3)
 	{
+		for (int i = 0; i < getRow(); ++i)
+		{
+			delete[]board[i];
+		}
+		delete[]board;
 		return true;
 	}
 	else
 	{
+		for (int i = 0; i < getRow(); ++i)
+		{
+			delete[]board[i];
+		}
+		delete[]board;
 		return false;
 	}
+
 }
 
 

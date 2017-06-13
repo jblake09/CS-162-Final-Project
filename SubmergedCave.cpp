@@ -4,10 +4,10 @@
 
 SubmergedCave::SubmergedCave(Hero *player):Room(player)
 {
-	setCol(5);
-	setRow(20);
-	player->setXpos(2);
-	player->setYpos(18);
+	setCol(3);
+	setRow(10);
+	player->setXpos(1);
+	player->setYpos(8);
 }
 
 void SubmergedCave::populateLevel()
@@ -24,16 +24,26 @@ void SubmergedCave::populateLevel()
 			board[i][j] = '~';
 		}
 	}
+
 	for (int i = 0; i < getRow(); ++i)
 	{
 		board[i][0] = '#';
+		board[i][2] = '#';
 	}
-	
-	
-	board[17][1] = '#';
-	board[17][3] = '#';
-	
+	board[9][1] = '#';
+	/*
+	for (int i = 1; i < getRow() - 1; ++i)
+	{
+		board[i][2] = '#';
+	}
+
+	for (int i = 1; i < getCol(); ++i)
+	{
+		board[i][9] = '#';
+	}
+	*/
 	setLevel(board);
+	
 }
 
 void SubmergedCave::playerHealthDrain()
@@ -48,6 +58,33 @@ void SubmergedCave::playerHealthDrain()
 void SubmergedCave::playerInteract()
 {
 	cout << "Theres nothing to interact with here" << endl;
+}
+
+bool SubmergedCave::newRoom()
+{
+	Hero *temp = getHero();
+	char **copyOriginal = getLevel();
+	char **board = new char*[getRow()];
+	for (int i = 0; i < getRow(); ++i)
+	{
+		board[i] = new char[getCol()];
+	}
+	for (int i = 0; i < getRow(); i++)
+	{
+		for (int j = 0; j < getCol(); j++)
+		{
+			board[i][j] = copyOriginal[i][j];
+		}
+	}
+
+	if (temp->getYpos() == 0 && temp->getXpos() == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 

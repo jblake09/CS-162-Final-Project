@@ -11,6 +11,7 @@ public:
 	void populateLevel();
 	void playerHealthDrain();
 	void playerInteract();
+	bool newRoom();
 	~SubmergedCave();
 };
 

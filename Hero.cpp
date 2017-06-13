@@ -4,7 +4,7 @@
 
 Hero::Hero()
 {
-	setHealth(20);
+	setHealth(50);
 	setDisplay('V');
 	setArmor(5);
 	setType("Steve Helsing");

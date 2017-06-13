@@ -45,6 +45,7 @@ public:
 	void printLevel();
 	void printGame();
 	virtual bool newRoom();
+	virtual string newRommDir();
 	~Room();
 };
 
