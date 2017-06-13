@@ -97,18 +97,12 @@ void Cave::playerInteract()
 	if (board[temp->getYpos()][temp->getXpos() + 1] == '/' || board[temp->getYpos()][temp->getXpos() - 1] == '/')
 	{
 
-		for (int i = 1; i < getRow(); ++i)
-		{
-			board[0][i] = '.';
-		}
+		board[0][3] = '.';
 		setLevel(board);
 	}
 	else if (board[temp->getYpos() + 1][temp->getXpos()] == '/' || board[temp->getYpos() - 1][temp->getXpos()] == '/')
 	{
-		for (int i = 0; i < getRow(); ++i)
-		{
-			board[0][i] = '.';
-		}
+		board[0][3] = '.';
 		setLevel(board);
 	}
 	else
@@ -123,6 +117,32 @@ void Cave::playerInteract()
 
 	delete[]board;
 	*/
+}
+
+bool Cave::newRoom()
+{
+	Hero *temp = getHero();
+	char **copyOriginal = getLevel();
+	char **board = new char*[getRow()];
+	for (int i = 0; i < getRow(); ++i)
+	{
+		board[i] = new char[getCol()];
+	}
+	for (int i = 0; i < getRow(); i++)
+	{
+		for (int j = 0; j < getCol(); j++)
+		{
+			board[i][j] = copyOriginal[i][j];
+		}
+	}
+	if (temp->getYpos() == 0 && temp->getXpos() == 3)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 

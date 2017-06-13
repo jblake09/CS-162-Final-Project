@@ -44,6 +44,7 @@ public:
 	virtual void playerInteract();
 	void printLevel();
 	void printGame();
+	virtual bool newRoom();
 	~Room();
 };
 

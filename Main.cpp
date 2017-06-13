@@ -18,15 +18,51 @@ int main()
 	char action;
 	bool program = true;
 	Hero *test = new Hero();
-	//Room *testCave = new Cave(test);
+	Room *testCave = new Cave(test);
 	Room *testSubmerge = new SubmergedCave(test);
-	//testCave->createLevel();
-	//testCave->populateLevel();
+	testCave->createLevel();
+	testCave->populateLevel();
 	testSubmerge->createLevel();
 	testSubmerge->populateLevel();
-	//testCave->printLevel();
+	testCave->setNorth(testSubmerge);
+	Room *currentRoom = new Cave(test);
+	currentRoom->createLevel();
+	currentRoom->populateLevel();
+	//currentRoom->printLevel();
+	//currentRoom->printGame();
+	
 	while (!(test->Dead()))
 	{
+			//testCave->MovePlayer();
+			//testCave->printGame();
+			//testSubmerge->printGame();
+		currentRoom->printGame();
+		cout << "Controls a(Left), d(right), s(down), w(up), e(interact), t(use pack item): " << endl;
+		cin >> action;
+		if (action == 'a' || action == 'd' || action == 's' || action == 'w')
+		{
+			currentRoom->MovePlayer(action);
+			//testSubmerge->MovePlayer(action);
+			//testCave->MovePlayer(action);
+		}
+		else if (action == 't')
+		{
+			cout << "Which item would you like to use? (1,2,3) ";
+			int itemChoice;
+			cin >> itemChoice;
+			test->useFromPack(itemChoice);
+		}
+		else if (action == 'e')
+		{
+			currentRoom->playerInteract();
+			//testSubmerge->playerInteract();
+			//testCave->playerInteract();
+		}
+		//currentRoom = currentRoom->getNorth();
+		cout << "next Level = " << currentRoom->newRoom();
+	}
+	
+		/*
 		//testCave->MovePlayer();
 		//testCave->printGame();
 		testSubmerge->printGame();
@@ -51,7 +87,7 @@ int main()
 		}
 
 	}
-	
+	*/
 	/*
 	char ** board = new char *[row];
 	for (int i = 0; i < row; ++i)

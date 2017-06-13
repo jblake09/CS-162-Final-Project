@@ -62,7 +62,7 @@ void Room::MovePlayer(char mover)
 	int prevX = player->getXpos(), prevY = player->getYpos();
 	player->move(mover);
 	int nextX = player->getXpos(), nextY = player->getYpos();
-	if (level[nextY][nextX] == '.')
+	if (level[nextY][nextX] == '.' || level[nextY][nextX] == '~')
 	{
 		level[player->getYpos()][player->getXpos()] = player->getDisplay();
 		level[prevY][prevX] = '.';
@@ -214,6 +214,11 @@ void Room::printGame()
 	printLevel();
 	player->printHealth();
 	player->printPack();
+}
+
+bool Room::newRoom()
+{
+	return false;
 }
 
 Room::~Room()
