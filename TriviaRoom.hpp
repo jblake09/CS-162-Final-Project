@@ -1,4 +1,7 @@
-#pragma once
+#ifndef TRIVIAROOM_HPP
+#define TRIVIAROOM_HPP
+
+
 #include "Room.hpp"
 class TriviaRoom :
 	public Room
@@ -13,3 +16,4 @@ public:
 	~TriviaRoom();
 };
 
+#endif // !TRIVIAROOM_HPP

@@ -83,6 +83,38 @@ void Room::MovePlayer(char mover)
 			level[player->getYpos()][player->getXpos()] = player->getDisplay();
 		}
 	}
+	else if (level[nextY][nextX] == 'K')
+	{
+		if ((player->getPack()).size() < 5)
+		{
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+			level[prevY][prevX] = '.';
+			player->add2Pack('K');
+		}
+		else
+		{
+			cout << "Your pack is full!" << endl;
+			player->setXpos(prevX);
+			player->setYpos(prevY);
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+		}
+	}
+	else if (level[nextY][nextX] == 'G')
+	{
+		if ((player->getPack()).size() < 5)
+		{
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+			level[prevY][prevX] = '.';
+			player->add2Pack('G');
+		}
+		else
+		{
+			cout << "Your pack is full!" << endl;
+			player->setXpos(prevX);
+			player->setYpos(prevY);
+			level[player->getYpos()][player->getXpos()] = player->getDisplay();
+		}
+	}
 	else if (level[nextY][nextX] != '.')
 	{
 		//cout << "hey" << endl;
@@ -167,7 +199,7 @@ void Room::setLevel(char **in)
 		delete[]in[i];
 	}
 	
-	delete[]in;
+	delete in;
 	
 	//delete in
 }

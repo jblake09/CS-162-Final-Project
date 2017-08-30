@@ -91,6 +91,12 @@ void TriviaRoom::playerInteract()
 	else
 	{
 		cout << "There is nothing to interact with!" << endl;
+		for (int i = 0; i < getRow(); i++)
+		{
+			delete[]board[i];
+		}
+
+		delete[]board;
 	}
 	/*
 	for (int i = 0; i < getRow(); i++)

@@ -54,33 +54,19 @@ int randomNum(int max, int min)
 void menu1(int &p1Choice)
 {
 	//output choices
-	cout << "Fantasy Battle" << endl;
-	cout << "Player 1 choose your creature" << endl;
-	cout << "1) Vampire" << endl;
-	cout << "2) Barbarian" << endl;
-	cout << "3) Blue Men" << endl;
-	cout << "4) Medusa" << endl;
-	cout << "5) Harry Potter" << endl;
-	cout << "6) Quit" << endl;
-	cout << "Please enter the number of the creature you would like to select!";
+	cout << "Welcom to Bob Jones Adventure!" << endl;
+	cout << "Indiana Jones was out of town but a message came in" << endl;
+	cout << "that the lost the treasure of the lost tomb of Arkanas" << endl;
+	cout << "was in danger there was no time to wait for Indy" << endl;
+	cout << "You must find the treasure before it is to late, but beware" << endl;
+	cout << "you cant survive for long in there without health potion!" << endl;
+	cout << "1) Play" << endl;
+	cout << "2) Quit" << endl;
+	cout << "Please enter your selection! ";
 	//ask user for through input validation function
 	validMainMenu(p1Choice);
 }
-void menu2(int &p2Choice)
-{
-	//output choices
-	cout << "Fantasy Battle" << endl;
-	cout << "Player 2 choose your creature" << endl;
-	cout << "1) Vampire" << endl;
-	cout << "2) Barbarian" << endl;
-	cout << "3) Blue Men" << endl;
-	cout << "4) Medusa" << endl;
-	cout << "5) Harry Potter" << endl;
-	cout << "6) Quit" << endl;
-	cout << "Please enter the number of the creature you would like to select!";
-	//ask user for through input validation function
-	validMainMenu(p2Choice);
-}
+
 /*********************************************************************************************************************
 ** Description: Validates main menu inout
 *********************************************************************************************************************/
@@ -89,7 +75,7 @@ void validMainMenu(int &input)
 	//ensure input is an int
 	validateInput(input);
 	//ensure input is appropiate with choices
-	while (input != 1 && input != 2 && input != 3 && input != 4 && input != 5 && input != 6)
+	while (input != 1 && input != 2)
 	{
 		//if they didnt warn them and have them re input
 		cout << "Input is invalid :(" << endl;
@@ -153,5 +139,43 @@ void validPlayAgain(int &inToBeValid)
 		cout << "Please make valid menu selection!" << endl;
 		validateInput(inToBeValid);
 	}
+}
+void validItemSelect(int &inToBeValid)
+{
+	//ensure input is an int
+	validateInput(inToBeValid);
+	//ensure input is appropiate with choices
+	while (inToBeValid != 1 && inToBeValid != 2 && inToBeValid != 3)
+	{
+		//if they didnt warn them and have them re input
+		cout << "Input is invalid :(" << endl;
+		cout << "Please make valid menu selection!" << endl;
+		validateInput(inToBeValid);
+	}
+}
+
+void validCharInput(char &inChar)
+{
+	validateChar(inChar);
+	while (inChar != 'a' && inChar != 'd' && inChar != 's' && inChar != 'w' && inChar != 'e' && inChar != 't')
+	{
+		cout << "please enter a vaild input ";
+		validateChar(inChar);
+	}
+}
+
+void validateChar(char &in)
+{
+	string inString;
+	cin >> inString;
+	while (inString.size() > 1)
+	{
+		cout << "Please enter a single character! ";
+		cin >> inString;
+
+	}
+	
+	in = inString[0];
+	
 }
 

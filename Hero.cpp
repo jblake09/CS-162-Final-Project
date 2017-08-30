@@ -7,10 +7,10 @@ Hero::Hero()
 	setHealth(50);
 	setDisplay('V');
 	setArmor(5);
-	setType("Steve Helsing");
+	setType("Bob Jones");
 	setXpos(2);
 	setYpos(2);
-	setOriginalHealth(20);
+	setOriginalHealth(50);
 }
 
 void Hero::move(char movement)

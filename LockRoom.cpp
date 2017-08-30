@@ -1,19 +1,19 @@
-#include "Cave.hpp"
+#include "LockRoom.hpp"
 
 
 
-Cave::Cave(Hero *player):Room(player)
+LockRoom::LockRoom(Hero* player):Room(player)
 {
 	setCol(10);
 	setRow(10);
-	player->setXpos(5);
-	player->setYpos(8);
+	player->setXpos(1);
+	player->setYpos(1);
 }
 
-void Cave::populateLevel()
+void LockRoom::populateLevel()
 {
 	char **board = new char*[getRow()];
-	for(int i = 0; i < getRow(); ++i)
+	for (int i = 0; i < getRow(); ++i)
 	{
 		board[i] = new char[getCol()];
 	}
@@ -24,7 +24,7 @@ void Cave::populateLevel()
 			board[i][j] = '.';
 		}
 	}
-	int count = 5;
+	int count = 8;
 	while (count > 0)
 	{
 		int x = randomNum(8, 1);
@@ -32,33 +32,35 @@ void Cave::populateLevel()
 		board[y][x] = 'H';
 		count--;
 	}
-	
+
 	for (int i = 0; i < getCol(); ++i)
 	{
 		board[i][0] = '#';
 	}
-	
+
 	for (int i = 1; i < getRow(); ++i)
 	{
 		board[0][i] = '#';
 	}
-	
+
 	for (int i = 1; i < getCol(); ++i)
 	{
 		board[i][9] = '#';
 	}
-	
+
 	for (int i = 1; i < getRow() - 1; ++i)
 	{
 		board[9][i] = '#';
 	}
+
+	int keyHoleX = randomNum(8, 1), KeyHoleY = randomNum(8, 1);
+	board[4][4] = 'K';
+	board[8][8] = 'O';
 	
-	int leverX = randomNum(8, 1), leverY = randomNum(8, 1);
-	board[5][5] = '/';
 	setLevel(board);
 }
 
-void Cave::playerHealthDrain()
+void LockRoom::playerHealthDrain()
 {
 	Hero* temp = getHero();
 	int health = temp->getHealth();
@@ -67,7 +69,7 @@ void Cave::playerHealthDrain()
 	setHero(temp);
 }
 
-void Cave::playerInteract()
+void LockRoom::playerInteract()
 {
 	Hero *temp = getHero();
 	char **copyOriginal = getLevel();
@@ -83,34 +85,67 @@ void Cave::playerInteract()
 			board[i][j] = copyOriginal[i][j];
 		}
 	}
-	
-	if (board[temp->getYpos()][temp->getXpos() + 1] == '/' || board[temp->getYpos()][temp->getXpos() - 1] == '/')
+	/*
+	for (int i = 0; i < getRow(); i++)
+	{
+	for (int j = 0; j < getCol(); j++)
 	{
 
-		board[0][3] = '.';
-		setLevel(board);
+	cout << board[i][j];
 	}
-	else if (board[temp->getYpos() + 1][temp->getXpos()] == '/' || board[temp->getYpos() - 1][temp->getXpos()] == '/')
+	cout << endl;
+	}
+	*/
+	if (board[temp->getYpos()][temp->getXpos() + 1] == 'O' || board[temp->getYpos()][temp->getXpos() - 1] == 'O' )
 	{
-		board[0][3] = '.';
-		setLevel(board);
+		string tempList = temp->getPack();
+		int index;
+		index = tempList.find('K');
+		if (index == string::npos)
+		{
+			cout << "You dont have the key!" << endl;
+		}
+		else
+		{
+			cout << "Holy cow this key is made of gold beter hold onto this!" << endl;
+			board[8][1] = '.';
+			setLevel(board);
+		}
 	}
+	
+	else if (board[temp->getYpos() + 1][temp->getXpos()] == 'O' || board[temp->getYpos()][temp->getXpos()-1] == 'O')
+	{
+		string tempList = temp->getPack();
+		int index;
+		index = tempList.find('K');
+		if (index == string::npos)
+		{
+			cout << "You dont have the key!" << endl;
+		}
+		else
+		{
+			cout << "Holy cow this key is made of gold beter hold onto this!" << endl;
+			board[9][1] = '.';
+			setLevel(board);
+		}
+		
+	}
+	
 	else
 	{
 		cout << "There is nothing to interact with!" << endl;
 		
-	}
-	//for (int i = 0; i < getRow(); i++)
-	//{
-		//delete[]board[i];
-	//}
+		for (int i = 0; i < getRow(); i++)
+		{
+			delete[]board[i];
+		}
 
-	//delete[]board;
+		delete[]board;
 	
-	
+	}
 }
 
-bool Cave::newRoom()
+bool LockRoom::newRoom()
 {
 	Hero *temp = getHero();
 	char **copyOriginal = getLevel();
@@ -126,13 +161,13 @@ bool Cave::newRoom()
 			board[i][j] = copyOriginal[i][j];
 		}
 	}
-	if (temp->getYpos() == 0 && temp->getXpos() == 3)
+	if (temp->getYpos() == 9 && temp->getXpos() == 1)
 	{
 		for (int i = 0; i < getRow(); ++i)
 		{
 			delete[]board[i];
 		}
-		delete []board;
+		delete[]board;
 		return true;
 	}
 	else
@@ -141,13 +176,12 @@ bool Cave::newRoom()
 		{
 			delete[]board[i];
 		}
-		delete board;
+		delete[]board;
 		return false;
 	}
-
 }
 
 
-Cave::~Cave()
+LockRoom::~LockRoom()
 {
 }
